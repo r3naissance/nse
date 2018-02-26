@@ -14,7 +14,7 @@ Concrete5 - CVE-2017-18195 - Authorization Bypass Through User-Controlled Key (I
 -- @output
 -- PORT   STATE SERVICE VERSION
 -- 80/tcp open  http    
--- | http-vuln-cve2017-5868:
+-- | http-vuln-cve2017-18195:
 -- |   VULNERABLE:
 -- |   Concrete5 Authorization Bypass Through User-Controlled Key (IDOR)
 -- |       State: VULNERABLE
@@ -41,7 +41,7 @@ Concrete5 - CVE-2017-18195 - Authorization Bypass Through User-Controlled Key (I
 -- @args http-vuln-tbd.end_id sets the last comment to get
 --
 -- @xmloutput
--- <table key="CVE-2017-5868">
+-- <table key="CVE-2017-18195">
 -- <elem key="title">Concrete5 Authorization Bypass Through User-Controlled Key (IDOR)</elem>
 -- <elem key="state">VULNERABLE</elem>
 -- <table key="ids">
