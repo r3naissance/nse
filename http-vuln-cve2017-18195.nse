@@ -82,7 +82,7 @@ action = function(host, port)
 
     data = {}
     data['cnvID'] = id
-    data['cID'] = '172'
+    data['cID'] = '1'
 
     local response = http.post(host, port, vuln_uri, options, nil, data)
     stdnse.debug1("Response %s", response.status) 
