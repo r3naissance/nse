@@ -6,7 +6,7 @@ local vulns = require "vulns"
 local table = require "table"
 
 description = [[
-CRK Business Platform - CVE-2020-13968 - SQL Injection
+CRK Business Platform - CVE-2020-13968 - SQL Injection on versions <= 2019.1
 ]]
 
 ---
@@ -16,7 +16,7 @@ CRK Business Platform - CVE-2020-13968 - SQL Injection
 -- 443/tcp open  http
 -- | http-vuln-cve2020-13968:
 -- |   VULNERABLE:
--- |   CRK Business Platform - SQL Injection
+-- |   CRK Business Platform - SQL Injection on versions <= 2019.1
 -- |       State: VULNERABLE
 -- |     IDs:  CVE:CVE-2020-13968
 -- |     Risk factor: High
@@ -30,7 +30,7 @@ CRK Business Platform - CVE-2020-13968 - SQL Injection
 --
 -- @xmloutput
 -- <table key="CVE-2020-13968">
--- <elem key="title">CRK Business Platform - SQL Injection</elem>
+-- <elem key="title">CRK Business Platform - SQL Injection on versions <= 2019.1</elem>
 -- <elem key="state">VULNERABLE</elem>
 -- <table key="ids">
 -- <elem>CVE:CVE-2020-13968</elem>
