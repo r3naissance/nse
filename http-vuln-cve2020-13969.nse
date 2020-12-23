@@ -6,7 +6,7 @@ local vulns = require "vulns"
 local table = require "table"
 
 description = [[
-CRK Business Platform - CVE-2020-13969 - Reflective Cross-Site Scripting
+CRK Business Platform - CVE-2020-13969 - Reflective Cross-Site Scripting on versions <= 2019.1
 ]]
 
 ---
@@ -16,7 +16,7 @@ CRK Business Platform - CVE-2020-13969 - Reflective Cross-Site Scripting
 -- 443/tcp open  http
 -- | http-vuln-cve2020-13969:
 -- |   VULNERABLE:
--- |   CRK Business Platform - Reflective Cross-Site Scripting
+-- |   CRK Business Platform - Reflective Cross-Site Scripting on versions <= 2019.1
 -- |       State: VULNERABLE
 -- |     IDs:  CVE:CVE-2020-13969
 -- |     Risk factor: High
@@ -30,7 +30,7 @@ CRK Business Platform - CVE-2020-13969 - Reflective Cross-Site Scripting
 --
 -- @xmloutput
 -- <table key="CVE-2020-13968">
--- <elem key="title">CRK Business Platform - Reflective Cross-Site Scripting</elem>
+-- <elem key="title">CRK Business Platform - Reflective Cross-Site Scripting on versions <= 2019.1</elem>
 -- <elem key="state">VULNERABLE</elem>
 -- <table key="ids">
 -- <elem>CVE:CVE-2020-13969</elem>
