@@ -49,18 +49,24 @@ action = function(host, port)
 	local result = {}
 	local url = ""
 	local filename = stdnse.get_script_args('http-urls.out')
+	local domain = ""
+        if host.targetname then
+                domain = host.targetname
+        else
+                domain = host.ip
+        end
 
 	if string.match(port.service, 'https') then
 		if port.number == 443 then
-			url = "https://" .. host.targetname
+			url = "https://" .. domain
 		else
-			url = "https://" .. host.targetname .. ":" .. port.number
+			url = "https://" .. domain .. ":" .. port.number
 		end
 	else
 		if port.number == 80 then
-			url = "http://" .. host.targetname
+			url = "http://" .. domain
 		else
-			url = "http://" .. host.targetname .. ":" .. port.number
+			url = "http://" .. domain .. ":" .. port.number
 		end
 	end
 
