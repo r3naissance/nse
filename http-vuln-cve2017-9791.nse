@@ -75,6 +75,8 @@ when using untrusted input as a part of the error message in the ActionMessage c
 
   if response and response.status == 200 and response.header["X-RCE-Test"] == 'You can be hacked!' then
     vuln.state = vulns.STATE.VULN
+  else
+    stdnse.debug1("Not vulnerable to CVE-2017-9791")
   end
 
   return vuln_report:make_output(vuln)
