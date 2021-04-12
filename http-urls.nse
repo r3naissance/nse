@@ -57,17 +57,9 @@ action = function(host, port)
         end
 
 	if string.match(port.service, 'https') then
-		if port.number == 443 then
-			url = "https://" .. domain
-		else
-			url = "https://" .. domain .. ":" .. port.number
-		end
+		url = "https://" .. domain .. ":" .. port.number
 	else
-		if port.number == 80 then
-			url = "http://" .. domain
-		else
-			url = "http://" .. domain .. ":" .. port.number
-		end
+		url = "http://" .. domain .. ":" .. port.number
 	end
 
 	if filename then
