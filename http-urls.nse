@@ -50,28 +50,27 @@ action = function(host, port)
 	local url = ""
 	local filename = stdnse.get_script_args('http-urls.out')
 	local domain = ""
+	local s_url, url
         if host.targetname then
                 domain = host.targetname
         else
                 domain = host.ip
         end
 
-	if string.match(port.service, 'https') or string.match(port.service, 'ssl') then
-		url = "https://" .. domain .. ":" .. port.number
-	else
-		url = "http://" .. domain .. ":" .. port.number
-	end
+	s_url = 'https://' .. domain .. ':' .. port.number
+	url = 'http://' .. domain .. ':' .. port.number
 
 	if filename then
 		file = io.open(filename, "a")
 		io.output(file)
+		io.write(s_url .. "\n")
 		io.write(url .. "\n")
 		io.close(file)
 		result[#result + 1] = "Saved url to " .. filename
 	end
 
 	-- Return result
+	result[#result + 1] = s_url
 	result[#result + 1] = url
-	stdnse.debug1("Found valid url: " .. url)
 	return stdnse.format_output(true,  result)
 end
