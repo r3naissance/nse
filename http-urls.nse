@@ -56,7 +56,7 @@ action = function(host, port)
                 domain = host.ip
         end
 
-	if string.match(port.service, 'https') then
+	if string.match(port.service, 'https') or string.match(port.service, 'ssl') then
 		url = "https://" .. domain .. ":" .. port.number
 	else
 		url = "http://" .. domain .. ":" .. port.number
