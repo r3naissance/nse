@@ -49,7 +49,7 @@ action = function(host, port)
 	local start_time = nmap.clock_ms()
 
 	-- Run - `enum4linx <ip> >> filename.txt` and ignore program errors, we'll do this later
-	local cmd = "enum4linux " .. host.ip .. " >> " .. filename .. " 2> /dev/null"
+	local cmd = "enum4linux -U -M -S -P -G -d" .. host.ip .. " >> " .. filename .. " 2> /dev/null"
 	
 	local ret = os.execute(cmd)
 
