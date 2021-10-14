@@ -1,5 +1,5 @@
 description = [[
-This script will return a list of valid urls and optionally save to file for use later (httpx , aquatone equivalent).
+This script will return a list of valid urls and optionally save to file for use later.
 ]]
 
 local http = require "http"
