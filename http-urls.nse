@@ -47,30 +47,18 @@ portrule = shortport.port_or_service( {80, 81, 300, 443, 591, 593, 832, 981, 101
 action = function(host, port)
 
 	local result = {}
-	local url = ""
 	local filename = stdnse.get_script_args('http-urls.out')
 	local domain = ""
-	local s_url, url
         if host.targetname then
                 domain = host.targetname
         else
                 domain = host.ip
         end
 
-	s_url = 'https://' .. domain .. ':' .. port.number
-	url = 'http://' .. domain .. ':' .. port.number
-
-	if filename then
-		file = io.open(filename, "a")
-		io.output(file)
-		io.write(s_url .. "\n")
-		io.write(url .. "\n")
-		io.close(file)
-		result[#result + 1] = "Saved url to " .. filename
-	end
+	cmd = "echo " .. domain .. " | httpx -timeout 2 -retries 2 -H 'User-Agent: " .. stdnse.get_script_args('http.useragent') .. "' -ports " .. port.number .. " >> " .. filename .. " 2> /dev/null"
+        local ret = os.execute(cmd)
 
 	-- Return result
-	result[#result + 1] = s_url
-	result[#result + 1] = url
-	return stdnse.format_output(true,  result)
+        result[#result + 1] = domain .. ":" .. port.number
+        return stdnse.format_output(true,  result)
 end
