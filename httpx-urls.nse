@@ -43,14 +43,6 @@ categories = { "discovery" }
 -- aquatone xlarge ports
 portrule = shortport.port_or_service( {80, 81, 300, 443, 591, 593, 832, 981, 1010, 1311, 2082, 2087, 2095, 2096, 2480, 3000, 3128, 3333, 4243, 4567, 4711, 4712, 4993, 5000, 5104, 5108, 5800, 6543, 7000, 7396, 7474, 8000, 8001, 8008, 8014, 8042, 8069, 8080, 8081, 8088, 8090, 8091, 8118, 8123, 8172, 8222, 8243, 8280, 8281, 8333, 8443, 8500, 8834, 8880, 8888, 8983, 9000, 9043, 9060, 9080, 9090, 9091, 9200, 9443, 9800, 9981, 12443, 16080, 18091, 18092, 20720, 28017}, {"http", "https"}, "tcp", "open")
 
-local function try_url (url)
-	stdnse.debug(0, "Attempting: %s", url)
-        local response = http.get_url(url .. "/")
-        stdnse.debug(0, "%s [%s]", url, response.status)
-	return response
-end
-
-
 -- Business end of script
 action = function(host, port)
 
@@ -63,15 +55,10 @@ action = function(host, port)
                 domain = host.ip
         end
 
-	local response = try_url("http://" .. domain .. ":" .. port.number)
-	if response and response.status then
-		result[#result + 1] = "http://" .. domain .. ":" .. port.number
-		return stdnse.format_output(true,  result)
-	end
+	cmd = "echo " .. domain .. " | httpx -timeout 2 -retries 2 -H 'User-Agent: " .. stdnse.get_script_args('http.useragent') .. "' -ports " .. port.number .. " >> " .. filename .. " 2> /dev/null"
+        local ret = os.execute(cmd)
 
-        response = try_url("https://" .. domain .. ":" .. port.number)
-        if response and response.status then
-                result[#result + 1] = "https://" .. domain .. ":" .. port.number
-		return stdnse.format_output(true,  result)
-        end
+	-- Return result
+        result[#result + 1] = domain .. ":" .. port.number
+        return stdnse.format_output(true,  result)
 end
