@@ -50,6 +50,13 @@ local function try_url (url)
 	return response
 end
 
+local function write_log (filename, url)
+        file = io.open(filename, "a")
+        io.output(file)
+        io.write(url .. "\n")
+        io.close(file)
+	stdnse.debug(0, "Saved %s to %s", url, filename)
+end
 
 -- Business end of script
 action = function(host, port)
@@ -66,12 +73,18 @@ action = function(host, port)
 	local response = try_url("http://" .. domain .. ":" .. port.number)
 	if response and response.status then
 		result[#result + 1] = "http://" .. domain .. ":" .. port.number
+		if filename then
+			write_log(filename, "http://" .. domain .. ":" .. port.number)
+		end
 		return stdnse.format_output(true,  result)
 	end
 
         response = try_url("https://" .. domain .. ":" .. port.number)
         if response and response.status then
                 result[#result + 1] = "https://" .. domain .. ":" .. port.number
+                if filename then
+                        write_log(filename, "https://" .. domain .. ":" .. port.number)
+                end
 		return stdnse.format_output(true,  result)
         end
 end
