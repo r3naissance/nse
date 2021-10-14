@@ -1,2 +1,0 @@
-http://google.com:80
-https://google.com:443
