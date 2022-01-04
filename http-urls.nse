@@ -73,7 +73,7 @@ action = function(host, port)
                 stdnse.debug(0, "HTTP service found")
                 result[#result + 1] = "http://" .. domain .. ":" .. port.number
                 if filename then
-                        write_log(filename, "https://" .. domain .. ":" .. port.number)
+                        write_log(filename, "http://" .. domain .. ":" .. port.number)
                 end
         end
         return stdnse.format_output(true,  result)
