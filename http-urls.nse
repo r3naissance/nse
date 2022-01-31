@@ -57,6 +57,7 @@ action = function(host, port)
         local result = {}
         local filename = stdnse.get_script_args('http-urls.out')
         local domain = ""
+        local url = ""
         if host.targetname then
                 domain = host.targetname
         else
@@ -65,15 +66,25 @@ action = function(host, port)
 
         if string.find(port.service, "https") or string.find(port.version.service_tunnel, "ssl") then
                 stdnse.debug(0, "HTTPS service found")
-                result[#result + 1] = "https://" .. domain .. ":" .. port.number
+                if port.number == 443 then
+                    url = "https://" .. domain
+                else
+                  url = "https://" .. domain .. ":" .. port.number
+                end
+                result[#result + 1] = url
                 if filename then
-                        write_log(filename, "https://" .. domain .. ":" .. port.number)
+                    write_log(filename, url)
                 end
         elseif string.find(port.service, "http") then
                 stdnse.debug(0, "HTTP service found")
-                result[#result + 1] = "http://" .. domain .. ":" .. port.number
+                if port.number == 80 then
+                    url = "http://" .. domain
+                else
+                  url = "http://" .. domain .. ":" .. port.number
+                end
+                result[#result + 1] = url
                 if filename then
-                        write_log(filename, "http://" .. domain .. ":" .. port.number)
+                    write_log(filename, url)
                 end
         end
         return stdnse.format_output(true,  result)
