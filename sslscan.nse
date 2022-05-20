@@ -9,23 +9,6 @@ author = "Chapman (R3naissance) Schleiss"
 
 license = "Same as Nmap--See https://nmap.org/book/man-legal.html"
 
----
--- @usage
--- nmap -p 443 <target> --script sslscan --script-args sslscan.out=<dir>
----
--- @args sslscan.out Directory to save output
---
--- @output
--- PORT   STATE SERVICE
--- 443/tcp open  https
--- |   Runtime: 0.598s - ACCESS DENIED (Likely)
--- |_  Enumeration can be found in null-session-enumeration.txt
--- @output
--- PORT   STATE SERVICE
--- 389/tcp open  ldap
--- |   Runtime: 59.003s - ACCESS ALLOWED (Likely)
--- |_  Enumeration can be found in null-session-enumeration_192.168.1.1.txt
-
 categories = {"discovery", "safe"}
 
 -- Required stuff
