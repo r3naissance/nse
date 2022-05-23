@@ -23,7 +23,7 @@ function os.capture(cmd, raw)
   if raw then return s end
   s = string.gsub(s, '^%s+', '')
   s = string.gsub(s, '%s+$', '')
-  s = string.gsub(s, '[\n\r]+', ' ')
+  -- s = string.gsub(s, '[\n\r]+', ' ')
   return s
 end
 
@@ -37,8 +37,7 @@ action = function(host, port)
         else
                 domain = host.ip
         end
-  
-        stdnse.debug(1, "Finding trans on %s", domain)
+
 
         local cmd = "ike-scan -M -A -P -n 0xdeadbeef -d " .. port.number .. " " .. domain
         stdnse.debug(3, "Command: %s", cmd)
@@ -47,6 +46,7 @@ action = function(host, port)
                 result[#result + 1] = cmd
                 result[#result + 1] = ret
         else
+                stdnse.debug(1, "Finding trans on %s", domain)
                 for _, trans in ipairs(trans_array) do
                         local cmd = "ike-scan -M -A -n 0xdeadbeef -d " .. port.number .. " -P --trans=" .. trans .. " " .. domain
                         stdnse.debug(3, "Command: %s", cmd)
