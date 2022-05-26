@@ -15,6 +15,7 @@ categories = {"intrusive", "vuln"}
 local shortport = require "shortport"
 local stdnse = require "stdnse"
 portrule = shortport.version_port_or_service(500, "isakmp", "udp")
+local arg_timeout = stdnse.get_script_args(SCRIPT_NAME .. ".timeout") or "180"
 
 function os.capture(cmd, raw)
   local f = assert(io.popen(cmd, 'r'))
@@ -46,8 +47,14 @@ action = function(host, port)
                 result[#result + 1] = cmd
                 result[#result + 1] = ret
         else
+                i = nmap.clock_ms()
+                stdnse.debug(1, "Timeout: %s sec", arg_timeout)
                 stdnse.debug(1, "Finding trans on %s", domain)
                 for _, trans in ipairs(trans_array) do
+                        if (nmap.clock_ms() - i) / 1000 > tonumber(arg_timeout) then
+                                stdnse.debug(1, "Timeout reached")
+                                break
+                        end
                         local cmd = "ike-scan -M -A -n 0xdeadbeef -d " .. port.number .. " -P --trans=" .. trans .. " " .. domain
                         stdnse.debug(3, "Command: %s", cmd)
                         local ret = os.capture(cmd)
