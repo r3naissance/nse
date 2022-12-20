@@ -61,7 +61,7 @@ auth2-hostbased.c, and auth2-pubkey.c.
     }
   }
         local dir = "."
-        local wordlist = "/opt/SecLists/Usernames/cirt-default-usernames.txt"
+        local wordlist = "/opt/SecLists/Usernames/top-usernames-shortlist.txt"
 
         if stdnse.get_script_args('ssh-enum.out') then
                 dir = stdnse.get_script_args('ssh-enum.out')
