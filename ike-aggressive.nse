@@ -53,7 +53,7 @@ action = function(host, port)
                 for _, trans in ipairs(trans_array) do
                         if (nmap.clock_ms() - i) / 1000 > tonumber(arg_timeout) then
                                 result[#result + 1] = "Timeout reached"
-                                stdnse.debug(1, "Timeout reached")
+                                stdnse.debug(1, "Timeout reached while finding a valid trans")
                                 break
                         end
                         local cmd = "ike-scan -M -A -n 0xdeadbeef -d " .. port.number .. " -P --trans=" .. trans .. " " .. domain
