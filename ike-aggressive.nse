@@ -52,6 +52,7 @@ action = function(host, port)
                 stdnse.debug(1, "Finding trans on %s", domain)
                 for _, trans in ipairs(trans_array) do
                         if (nmap.clock_ms() - i) / 1000 > tonumber(arg_timeout) then
+                                result[#result + 1] = "Timeout reached"
                                 stdnse.debug(1, "Timeout reached")
                                 break
                         end
