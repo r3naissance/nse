@@ -14,7 +14,7 @@ categories = {"intrusive", "vuln"}
 -- Required stuff
 local shortport = require "shortport"
 local stdnse = require "stdnse"
-portrule = shortport.version_port_or_service(500, "isakmp", "udp")
+portrule = shortport.version_port_or_service(500, "isakmp", "udp", "open")
 local arg_timeout = stdnse.get_script_args(SCRIPT_NAME .. ".timeout") or "180"
 
 function os.capture(cmd, raw)
