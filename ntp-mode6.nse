@@ -29,7 +29,7 @@ action = function(host, port)
         local cmd = "ntpq -c rv " .. domain
         stdnse.debug(1, "Command: %s", cmd)
 
-        local ret = os.execute(cmd)
+        local ret = os.capture(cmd)
         if ret then
                 if (ret == nil) then
                         stdnse.debug(1, "Timeout on %s", domain)
