@@ -14,7 +14,7 @@ categories = {"discovery", "safe"}
 -- Required stuff
 local shortport = require "shortport"
 local stdnse = require "stdnse"
-portrule = shortport.port_or_service(123, "ntp", {"udp", "tcp"})
+portrule = shortport.port_or_service(123, "ntp", {"udp", "tcp"}, "open")
 
 -- Business end of script
 action = function(host, port)
