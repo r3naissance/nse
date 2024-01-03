@@ -36,6 +36,7 @@ action = function(host, port)
                 else
                         result[#result + 1] = cmd
                         result[#result + 1] = ret
+                end
         else
                 result[#result + 1] = "Error: Could not run ntpq"
         end
