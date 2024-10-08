@@ -81,21 +81,21 @@ auth2-hostbased.c, and auth2-pubkey.c.
 
         local filename = dir .. "/" .. domain .. "_" .. port.number .. ".txt"
 
-        local cmd = "/opt/eatt/CVE-2018-15473/CVE-2018-15473.py -u notapossibleusername -p " .. port.number .. " " .. domain
+        local cmd = "/opt/eatt/CVE-2018-15473/CVE-2018-15473.py -u notapossibleusername -p " .. port.number .. " -t " .. domain
         stdnse.debug(1, "Command: %s", cmd)
 
         local ret = os.capture(cmd)
         if ret then
-                if string.find(ret, "is an invalid username") then
+                if string.find(ret, "Invalid username") then
                         stdnse.debug(1, "Potential ssh-enum found. Running %s list", wordlist)
-                        local cmd = "/opt/eatt/CVE-2018-15473/CVE-2018-15473.py -w " .. wordlist .. " -p " .. port.number .. " " .. domain
+                        local cmd = "/opt/eatt/CVE-2018-15473/CVE-2018-15473.py -w " .. wordlist .. " -p " .. port.number .. " -t " .. domain
                         ret = os.capture(cmd)
-                        if string.find(ret, "No valid user detected") then
-                                stdnse.debug(1, "False Positive")
-                        else
+                        if string.find(ret, " - Valid username") then
                                 result[#result + 1] = cmd
                                 result[#result + 1] = ret
                                 vuln.state = vulns.STATE.LIKELY_VULN
+                        else
+                                stdnse.debug(1, "False Positive")
                         end
                 end
         else
